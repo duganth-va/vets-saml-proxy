@@ -89,6 +89,28 @@ export const parseSamlRequest = function(req, res, next) {
         acsUrl: data.assertionConsumerServiceURL,
         forceAuthn: data.forceAuthn === 'true'
       };
+      if (!req.authnRequest.id) {
+        res.status(400).json({
+          error: "invalid_request",
+          error_description: 'The SAML authentication request id must be set'
+        });
+      } else if (!req.authnRequest.issuer) {
+        res.status(400).json({
+          error: "invalid_request",
+          error_description: 'The SAML authentication request issuer must be set'
+        });
+      } else if (!req.authnRequest.destination) {
+        res.status(400).json({
+          error: "invalid_request",
+          error_description: 'The SAML authentication request destination must be set'
+        });        
+      } else if (!req.authnRequest.acsUrl) {
+        res.status(400).json({
+          error: "invalid_request",
+          error_description: 'The SAML authentication request acsUrl must be set'
+        });        
+
+      }
       req.session.authnRequest = req.authnRequest;
     }
     next();
