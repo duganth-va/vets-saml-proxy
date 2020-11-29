@@ -66,7 +66,7 @@ phases:
           fi
           echo Deploying to ${env}
           # Set Cluster Name
-          CLUSTER="dvp-${env}-${AWS_APP_NAME}-cluster"
+          CLUSTER="td-${env}-${AWS_APP_NAME}-cluster"
           # Set Service Name
           SERVICE="td-${env}-${AWS_APP_NAME}-service"
           slackpost.sh -t started "Deploying ${CONTAINER} with ${IMAGE}:${DEPLOY_TAG} to ${env}."
