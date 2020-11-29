@@ -24,7 +24,7 @@
 ######################################################################
 version: 0.2
 env:
-  shell: bas
+  shell: bash
   variables:
     # These are the default deploy environments
     ENVIRONMENTS: "dev"
