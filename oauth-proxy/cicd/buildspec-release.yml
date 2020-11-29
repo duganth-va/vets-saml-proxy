@@ -41,20 +41,18 @@ phases:
       - slackpost.sh -t started "started OAuth Proxy release..."
       # check ci status of current commit hash
       - ci_status=$(gh api ${repo}/commits/${commit_hash}/status | jq -r .state)
-      - |
-        echo "commit status: ${ci_status}"
-      - |
-        while [[ ${ci_status} == "pending" ]]; do
-          echo "ci still running -- sleep"
-          ci_status=$(gh api ${repo}/commits/${commit_hash}/status | jq -r .state)
-          echo "commit status: ${ci_status}"
-          sleep 10
-        done
-      - |
-        if [[ ${ci_status} != "success" ]]; then
-          echo "ci failed release aborted. ci status was ${ci_status}"
-          exit 1
-        fi
+      # - |
+      #   while [[ ${ci_status} == "pending" ]]; do
+      #     echo "ci still running -- sleep"
+      #     ci_status=$(gh api ${repo}/commits/${commit_hash}/status | jq -r .state)
+      #     echo "commit status: ${ci_status}"
+      #     sleep 10
+      #   done
+      # - |
+      #   if [[ ${ci_status} != "success" ]]; then
+      #     echo "ci failed release aborted. ci status was ${ci_status}"
+      #     exit 1
+      #   fi
       # create new tag
       - old_tag=$(git tag --sort=-creatordate | grep fargate-oauth-proxy | head -1)
       - echo "found ${old_tag} - incrementing..."
